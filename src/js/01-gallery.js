@@ -2,8 +2,9 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const gallaryInEl = document.querySelector('.gallery');
 
+const imageLib = { ...galleryItems };
 
-addImages(galleryItems)
+addImages(imageLib)
 function addImages() {
     const items = [];
     for (let i = 0; i < galleryItems.length; i += 1) {
@@ -11,29 +12,28 @@ function addImages() {
         item.classList.add('.gallery__item');
         const ref = document.createElement("a");
         ref.classList.add('gallery__link');
-        ref.href = 'large-image.jpg';
+        ref.href = imageLib[i].original;
         item.append(ref);
         const img = document.createElement("img");
         img.classList.add('gallery__image');
-        img.src = 'small-image.jpg';
-        img.dataset.sourse = 'large-image.jpg';
-        img.alt = 'Image description'
-        ref.append(img)
-
-
-        console.log(item)
-
-        // item.dataset.color = color;
-        // item.style.backgroundColor = color;
-        // item.style.width = 30 + i* 10 + 'px';
-        // item.style.height = 30 + i* 10 + 'px';
+        img.src = imageLib[i].preview;
+        img.dataset.sourse = imageLib[i].original;
+        img.alt = imageLib[i].description;
+        ref.append(img);
         items.push(item);
     }
-    gallaryInEl.append(items);
+    gallaryInEl.append(...items);
+};
+
+gallaryInEl.addEventListener('click', openModalLadgeImage)
+
+function openModalLadgeImage(event) {
+    event.preventDefault();
+    if (event.target.classList.contains('.gallery__image')) {
+        return
+    };
+    console.log(event.target.dataset.sourse)
+
 }
 
-
-
-
-console.log(gallaryInEl);
-    console.log(galleryItems);
+    // console.log(gallaryInEl);

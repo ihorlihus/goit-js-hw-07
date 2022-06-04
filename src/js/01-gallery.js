@@ -21,7 +21,7 @@ function addImages() {
         img.alt = imageLib[i].description;
         ref.append(img);
         items.push(item);
-    }
+    };
     gallaryInEl.append(...items);
 };
 
@@ -32,8 +32,17 @@ function openModalLadgeImage(event) {
     if (event.target.classList.contains('.gallery__image')) {
         return
     };
-    console.log(event.target.dataset.sourse)
+    const instance = basicLightbox.create(`
+    <img src="${event.target.dataset.sourse}" width="800" height="600">
+    `)
+    instance.show();
 
+    // const openModalEl = document.querySelector('.basicLightbox__placeholder')
+    // openModalEl.addEventListener('keydown', keydown())
+
+    // console.log(openModalEl);
 }
 
-    // console.log(gallaryInEl);
+// function keydown (event) {
+//     console.log("Keydown: ", event);
+// }

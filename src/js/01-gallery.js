@@ -37,12 +37,11 @@ function openModalLadgeImage(event) {
     `)
     instance.show();
 
-    // const openModalEl = document.querySelector('.basicLightbox__placeholder')
-    // openModalEl.addEventListener('keydown', keydown())
-
-    // console.log(openModalEl);
-}
-
-// function keydown (event) {
-//     console.log("Keydown: ", event);
-// }
+    const modalVisible = document.querySelector('.basicLightbox');
+    window.addEventListener('keydown', (event) => {
+        console.log(event.code)
+        if (event.code === 'Escape') {
+            modalVisible.remove();
+        }
+    });
+};

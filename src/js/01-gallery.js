@@ -29,19 +29,25 @@ gallaryInEl.addEventListener('click', openModalLadgeImage)
 
 function openModalLadgeImage(event) {
     event.preventDefault();
-    if (event.target.classList.contains('.gallery__image')) {
-        return
+    if (event.target.nodeName !== "IMG") {
+        return;
     };
     const instance = basicLightbox.create(`
     <img src="${event.target.dataset.sourse}" width="800" height="600">
-    `)
-    instance.show();
-
-    const modalVisible = document.querySelector('.basicLightbox');
-    window.addEventListener('keydown', (event) => {
-        console.log(event.code)
+    `, {
+        onShow: (instance) => document.addEventListener('keydown', (event) => {
+            console.log(event)
         if (event.code === 'Escape') {
-            modalVisible.remove();
+            instance.close();
         }
-    });
+    }),
+        onClose: (instance) => document.removeEventListener('keydown', (event) => {
+            console.log('must remove')
+        if (event.code === 'Escape') {
+            instance.close();
+        }
+    })
+        })
+    instance.show();
 };
+

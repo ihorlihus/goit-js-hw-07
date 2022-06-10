@@ -35,19 +35,26 @@ function openModalLadgeImage(event) {
     const instance = basicLightbox.create(`
     <img src="${event.target.dataset.sourse}" width="800" height="600">
     `, {
-        onShow: (instance) => document.addEventListener('keydown', (event) => {
-            console.log(event)
-        if (event.code === 'Escape') {
-            instance.close();
-        }
-    }),
-        onClose: (instance) => document.removeEventListener('keydown', (event) => {
-            console.log('must remove')
+		onShow: (instance) => addListener(),
+		onClose: (instance) => removeListener()
+	})
+    instance.show()
+
+    function addListener() {
+        document.addEventListener('keydown', (event) => {
+        console.log(event)
         if (event.code === 'Escape') {
             instance.close();
         }
     })
-        })
-    instance.show();
+};
+
+function removeListener() {
+    document.removeEventListener('keydown', (event) => {
+        if (event.code === 'Escape') {
+            instance.close();
+        }
+    })
+};
 };
 

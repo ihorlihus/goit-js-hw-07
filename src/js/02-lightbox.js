@@ -6,7 +6,7 @@ gallaryInEl.insertAdjacentHTML('afterbegin', items);
 const lightbox = new SimpleLightbox('.gallery a',
     { captionsData: 'alt', captionDelay: 250 });
 
-function createImagesElements(galleryItems) {
+function createImagesElements() {
     return galleryItems.map(({original, preview, description}) => {
     return `<a class="gallery__item" href="${original}">
     <img
